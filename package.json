@@ -10,8 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "daisyui": "^5.7.16",
+    "husky": "^9.1.7",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3",
+    "translate": "^3.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
