@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.9.0",
+    "@supabase/supabase-js": "^2.112.2",
     "@tailwindcss/vite": "^4.3.3",
     "daisyui": "^5.7.16",
     "husky": "^9.1.7",
