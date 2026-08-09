@@ -4,23 +4,25 @@ import { useStudySession, type StudyCard } from '@/stores/study-session-context'
 import type { WordType } from '@/types/word'
 import { buildRandomDeck } from '../utils/build-random-deck'
 
-const INITIAL_BATCH_SIZE = 5
+export const INITIAL_BATCH_SIZE = 5
 
 /**
  * Starts a random deck as soon as the first few cards are ready, then keeps
- * generating the rest in the background — a full sequential 20-card
- * generation is slow enough (each card is a translate + dictionary lookup,
- * sometimes several retries) that waiting for all of it up front made the
- * "Go" button feel stuck.
+ * generating the rest in the background — a full 20-card generation is slow
+ * enough (each card is a translate + dictionary lookup, sometimes several
+ * retries) that waiting for all of it up front made the "Go" button feel
+ * stuck.
  */
 export function useStartRandomDeck() {
   const { startDeck, appendCard, markComplete } = useStudySession()
   const navigate = useNavigate()
   const [isBuilding, setIsBuilding] = useState(false)
+  const [progress, setProgress] = useState(0)
   const [error, setError] = useState<string | null>(null)
 
   async function start(wordTypes: WordType[]) {
     setIsBuilding(true)
+    setProgress(0)
     setError(null)
 
     let started = false
@@ -28,6 +30,7 @@ export function useStartRandomDeck() {
 
     try {
       await buildRandomDeck(wordTypes, (card) => {
+        setProgress((count) => count + 1)
         if (!started) {
           initial.push(card)
           if (initial.length >= INITIAL_BATCH_SIZE) {
@@ -66,5 +69,5 @@ export function useStartRandomDeck() {
     }
   }
 
-  return { start, isBuilding, error }
+  return { start, isBuilding, progress, error }
 }

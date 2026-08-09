@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import type { WordType } from '@/types/word'
 import { WordTypePicker } from './word-type-picker'
+import { BuildingDeckIndicator } from './building-deck-indicator'
 import { useStartRandomDeck } from '../hooks/use-start-random-deck'
 
 export function RandomDeckForm() {
   const [selected, setSelected] = useState<WordType[]>([])
-  const { start, isBuilding, error } = useStartRandomDeck()
+  const { start, isBuilding, progress, error } = useStartRandomDeck()
 
   return (
     <div className="card bg-base-200 w-full max-w-md shadow-sm">
@@ -19,7 +20,7 @@ export function RandomDeckForm() {
           disabled={selected.length === 0 || isBuilding}
           onClick={() => start(selected)}
         >
-          {isBuilding ? 'Building deck…' : 'Go'}
+          {isBuilding ? <BuildingDeckIndicator progress={progress} /> : 'Go'}
         </button>
       </div>
     </div>

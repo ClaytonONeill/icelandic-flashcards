@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { useStartRandomDeck } from '@/features/deck-builder'
+import {
+  BuildingDeckIndicator,
+  useStartRandomDeck,
+} from '@/features/deck-builder'
 import {
   ResultsList,
   ResultsSummary,
@@ -93,9 +96,11 @@ export function StudyResultsRoute() {
           onClick={handleNewDeckSameParameters}
           disabled={startRandomDeck.isBuilding}
         >
-          {startRandomDeck.isBuilding
-            ? 'Building deck…'
-            : 'New Deck Same Parameters'}
+          {startRandomDeck.isBuilding ? (
+            <BuildingDeckIndicator progress={startRandomDeck.progress} />
+          ) : (
+            'New Deck Same Parameters'
+          )}
         </button>
         <button
           type="button"
