@@ -14,7 +14,9 @@ See [CLAUDE.md](./CLAUDE.md) for the detailed engineering rules (TypeScript stri
    ```
    cp .env.example .env.local
    ```
-3. Start the dev server:
+3. Apply the database schema. There's no Supabase CLI wired up for this project — instead, open your Supabase project's **SQL Editor** (dashboard → SQL Editor → New query) and run each file in `supabase/migrations/` in filename order (they're numbered). This creates `profiles`, `vocab_list`, `points_transactions`, `achievements`, `user_achievements`, and enables Row Level Security with owner-only policies on all of them.
+4. In the dashboard, go to **Authentication → Providers → Email** and turn **off** "Confirm email" for local development — otherwise a new signup can't be used until it's confirmed via a real email link. Turn it back on before any real users sign up.
+5. Start the dev server:
    ```
    npm run dev
    ```
@@ -53,19 +55,29 @@ src/
 
 Key decisions (see CLAUDE.md for the full rationale):
 
-- **Routing:** React Router, routes defined in `app/routes/`.
-- **Data fetching:** TanStack Query wraps every Supabase call — see `src/lib/supabase.ts` for the client and `src/features/word-lookup/api/use-random-word.ts` for the pattern to follow.
-- **Global state:** React Context + `useReducer`, kept minimal (e.g. `src/stores/theme-context.ts` + `theme-provider.tsx`).
-- **Styling:** Tailwind v4 + DaisyUI, configured in `src/index.css`. Multiple DaisyUI themes are enabled (light, dark, cupcake, forest, synthwave) and user-selectable via the theme picker in the header; the choice persists to `localStorage` and defaults to the OS `prefers-color-scheme`.
+- **Routing:** React Router, routes defined in `app/routes/`. `/login` and `/signup` are public; everything else nests under `app/routes/layout.tsx`, which wraps `RequireAuth` and renders the shared header (logo, theme picker, log out).
+- **Data fetching:** TanStack Query wraps every Supabase call — see `src/lib/supabase.ts` for the client. `src/features/word-generation/` is the pattern to follow for calling external (non-Supabase) APIs.
+- **Global state:** React Context + `useReducer`, kept minimal — auth session (`src/stores/auth-context.ts`), the active study session/deck (`src/stores/study-session-context.ts`), and theme (`src/stores/theme-context.ts`).
+- **Styling:** Tailwind v4 + DaisyUI, configured in `src/index.css`. Multiple DaisyUI themes are enabled (light, dark, cupcake, forest, synthwave) and user-selectable via the theme picker in the header; the choice persists to `localStorage` and defaults to the OS `prefers-color-scheme`. (Theme _unlocking_ via achievements isn't wired up yet — all themes are currently selectable by everyone.)
 - **Path alias:** import shared code as `@/...` (e.g. `@/lib/supabase`) instead of relative `../../..` chains.
 
-### Example feature: `word-lookup`
+### How a word becomes a flashcard
 
-`src/features/word-lookup/` is a working example of the intended feature shape (`api/`, `components/`, `index.ts`) — it's a demo that picks a random English word, translates it, and looks it up in a dictionary API via a TanStack Query hook. It doesn't call Supabase (it's not app data), but every real flashcard feature (decks, cards, study sessions) should follow the same shape, swapping the `api/` layer for calls into `src/lib/supabase.ts`.
+`src/features/word-generation/` is the core data pipeline, used by `deck-builder` to build decks:
+
+1. `faker.word.<type>()` picks a random English word of the requested type (noun/adjective/adverb/verb/conjunction/preposition/interjection).
+2. The `translate` package translates it to Icelandic.
+3. The Icelandic word is looked up against **[BÍN](https://bin.arnastofnun.is/)** (Beygingarlýsing íslensks nútímamáls — the Árni Magnússon Institute's official Icelandic inflection database), via the hosted wrapper at [ylhyra.is/api/inflection](https://github.com/ylhyra/icelandic-inflections). This returns the word's full inflection paradigm (case, gender, tense, person, degree, etc.), not just a definition.
+4. If no entry of the requested word type is found, steps 1–3 retry with a fresh random word (up to 8 attempts) — not every random word has a usable Icelandic entry.
+5. `formsToTable()` (also in `word-generation`) turns the raw inflection forms into a `GrammarTable` — a hand-written mapping per word type (verb conjugation, noun/adjective declension, adverb degree), since the real shape differs enough per type that a generic auto-layout isn't a good fit. This is what renders as the flip-side grammar table in `study-session`.
+
+BÍN's data is licensed **CC BY-SA 4.0** (© Árni Magnússon Institute for Icelandic Studies) — attributed in the app footer. It does not include English translations, which is why `translate` is still needed as a separate step.
 
 ## Known issues / gotchas
 
 - The Vercel build environment's Node version target is `^20.19.0 || ^22.13.0 || >=24`; local dev has occasionally shown an `EBADENGINE` warning on Node 22.12 during `npm install`. It hasn't caused real problems, but if you hit a dependency issue locally, check your Node version first.
-- `word-lookup` calls two free public APIs (a translate service and `freedictionaryapi.com`) with no API key and no rate-limit handling — fine for a demo, not production-grade. Don't copy its error handling as-is for real data fetching; it's intentionally minimal.
-- No authentication is wired up yet. When it is, document the auth flow here.
-- `mockups/wire_frames/` (not yet committed as of this writing) holds the design wireframes referenced during planning.
+- `word-generation` calls two free, keyless public APIs (`translate` and `ylhyra.is`) with no rate-limit handling beyond sequential (non-parallel) requests during deck generation. Fine for the current scale; if it ever proves unreliable, the plan is a server-side proxy (Supabase Edge Function), not a client-side workaround.
+- The verb conjugation table only covers the indicative mood, active voice (matching the app's grammar-table reference mockup) — subjunctive, imperative, and reflexive/middle-voice forms are intentionally left out.
+- Achievements, points spending (a future store), the vocab list page, and vocab-sourced decks aren't built yet — `points_transactions` rows are recorded on deck completion and `profiles.points_balance` updates automatically, but there's no UI surfacing achievements or a store.
+- `supabase/migrations/` holds the SQL schema (profiles, vocab_list, points_transactions, achievements, user_achievements — all RLS-enabled) but there's no Supabase CLI project linked, so migrations aren't applied automatically. Run them by hand via the dashboard's SQL Editor, in filename order, whenever a new one is added — see step 3 above.
+- `mockups/wire_frames/` holds the design wireframes referenced during planning.
