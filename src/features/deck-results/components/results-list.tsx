@@ -6,9 +6,14 @@ type Props = {
 }
 
 export function ResultsList({ cards }: Props) {
+  // Cards the user never got to (e.g. exited early, or the deck was still
+  // streaming in more cards) have no result yet — they don't belong in a
+  // right/wrong recap.
+  const attempted = cards.filter((card) => card.result !== null)
+
   return (
     <ul className="flex max-h-80 w-full flex-col gap-2 overflow-y-auto">
-      {cards.map((card) => (
+      {attempted.map((card) => (
         <li
           key={card.id}
           className="bg-base-200 flex flex-wrap items-center gap-2 rounded-lg p-2"
