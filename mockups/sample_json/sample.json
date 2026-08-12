@@ -1,0 +1,317 @@
+{
+  "word": "ruglaður",
+  "entries": [
+    {
+      "language": {
+        "code": "is",
+        "name": "Icelandic"
+      },
+      "partOfSpeech": "adjective",
+      "pronunciations": [],
+      "forms": [
+        {
+          "word": "ruglaðri",
+          "tags": ["comparative"]
+        },
+        {
+          "word": "ruglaðastur",
+          "tags": ["superlative"]
+        },
+        {
+          "word": "no-table-tags",
+          "tags": ["table-tags"]
+        },
+        {
+          "word": "is-adecl",
+          "tags": ["inflection-template"]
+        },
+        {
+          "word": "ruglaður",
+          "tags": ["masculine", "nominative", "strong"]
+        },
+        {
+          "word": "rugluð",
+          "tags": ["feminine", "nominative", "strong"]
+        },
+        {
+          "word": "ruglað",
+          "tags": ["neuter", "nominative", "strong"]
+        },
+        {
+          "word": "ruglaðan",
+          "tags": ["accusative", "masculine", "strong"]
+        },
+        {
+          "word": "ruglaða",
+          "tags": ["accusative", "feminine", "strong"]
+        },
+        {
+          "word": "ruglað",
+          "tags": ["accusative", "neuter", "strong"]
+        },
+        {
+          "word": "rugluðum",
+          "tags": ["dative", "masculine", "strong"]
+        },
+        {
+          "word": "ruglaðri",
+          "tags": ["dative", "feminine", "strong"]
+        },
+        {
+          "word": "rugluðu",
+          "tags": ["dative", "neuter", "strong"]
+        },
+        {
+          "word": "ruglaðs",
+          "tags": ["genitive", "masculine", "strong"]
+        },
+        {
+          "word": "ruglaðrar",
+          "tags": ["feminine", "genitive", "strong"]
+        },
+        {
+          "word": "ruglaðs",
+          "tags": ["genitive", "neuter", "strong"]
+        },
+        {
+          "word": "ruglaðir",
+          "tags": ["masculine", "nominative", "strong"]
+        },
+        {
+          "word": "ruglaðar",
+          "tags": ["feminine", "nominative", "strong"]
+        },
+        {
+          "word": "rugluð",
+          "tags": ["neuter", "nominative", "strong"]
+        },
+        {
+          "word": "ruglaða",
+          "tags": ["accusative", "masculine", "strong"]
+        },
+        {
+          "word": "ruglaðar",
+          "tags": ["accusative", "feminine", "strong"]
+        },
+        {
+          "word": "rugluð",
+          "tags": ["accusative", "neuter", "strong"]
+        },
+        {
+          "word": "rugluðum",
+          "tags": ["dative", "strong"]
+        },
+        {
+          "word": "ruglaðra",
+          "tags": ["genitive", "strong"]
+        },
+        {
+          "word": "ruglaði",
+          "tags": ["masculine", "nominative", "weak"]
+        },
+        {
+          "word": "ruglaða",
+          "tags": ["feminine", "nominative", "weak"]
+        },
+        {
+          "word": "ruglaða",
+          "tags": ["neuter", "nominative", "weak"]
+        },
+        {
+          "word": "ruglaða",
+          "tags": ["error-unrecognized-form", "masculine", "weak"]
+        },
+        {
+          "word": "rugluðu",
+          "tags": ["error-unrecognized-form", "feminine", "weak"]
+        },
+        {
+          "word": "ruglaða",
+          "tags": ["error-unrecognized-form", "neuter", "weak"]
+        },
+        {
+          "word": "rugluðu",
+          "tags": ["plural", "weak"]
+        },
+        {
+          "word": "no-table-tags",
+          "tags": ["table-tags"]
+        },
+        {
+          "word": "is-adecl",
+          "tags": ["inflection-template"]
+        },
+        {
+          "word": "ruglaðri",
+          "tags": ["masculine", "singular", "weak"]
+        },
+        {
+          "word": "ruglaðri",
+          "tags": ["feminine", "singular", "weak"]
+        },
+        {
+          "word": "ruglaðra",
+          "tags": ["neuter", "singular", "weak"]
+        },
+        {
+          "word": "ruglaðri",
+          "tags": ["plural", "weak"]
+        },
+        {
+          "word": "no-table-tags",
+          "tags": ["table-tags"]
+        },
+        {
+          "word": "is-adecl",
+          "tags": ["inflection-template"]
+        },
+        {
+          "word": "ruglaðastur",
+          "tags": ["masculine", "nominative", "strong"]
+        },
+        {
+          "word": "rugluðust",
+          "tags": ["feminine", "nominative", "strong"]
+        },
+        {
+          "word": "ruglaðast",
+          "tags": ["neuter", "nominative", "strong"]
+        },
+        {
+          "word": "ruglaðastan",
+          "tags": ["accusative", "masculine", "strong"]
+        },
+        {
+          "word": "ruglaðasta",
+          "tags": ["accusative", "feminine", "strong"]
+        },
+        {
+          "word": "ruglaðast",
+          "tags": ["accusative", "neuter", "strong"]
+        },
+        {
+          "word": "rugluðustum",
+          "tags": ["dative", "masculine", "strong"]
+        },
+        {
+          "word": "ruglaðastri",
+          "tags": ["dative", "feminine", "strong"]
+        },
+        {
+          "word": "rugluðustu",
+          "tags": ["dative", "neuter", "strong"]
+        },
+        {
+          "word": "ruglaðasts",
+          "tags": ["genitive", "masculine", "strong"]
+        },
+        {
+          "word": "ruglaðastrar",
+          "tags": ["feminine", "genitive", "strong"]
+        },
+        {
+          "word": "ruglaðasts",
+          "tags": ["genitive", "neuter", "strong"]
+        },
+        {
+          "word": "ruglaðastir",
+          "tags": ["masculine", "nominative", "strong"]
+        },
+        {
+          "word": "ruglaðastar",
+          "tags": ["feminine", "nominative", "strong"]
+        },
+        {
+          "word": "rugluðust",
+          "tags": ["neuter", "nominative", "strong"]
+        },
+        {
+          "word": "ruglaðasta",
+          "tags": ["accusative", "masculine", "strong"]
+        },
+        {
+          "word": "ruglaðastar",
+          "tags": ["accusative", "feminine", "strong"]
+        },
+        {
+          "word": "rugluðust",
+          "tags": ["accusative", "neuter", "strong"]
+        },
+        {
+          "word": "rugluðustum",
+          "tags": ["dative", "strong"]
+        },
+        {
+          "word": "ruglaðastra",
+          "tags": ["genitive", "strong"]
+        },
+        {
+          "word": "ruglaðasti",
+          "tags": ["masculine", "nominative", "weak"]
+        },
+        {
+          "word": "ruglaðasta",
+          "tags": ["feminine", "nominative", "weak"]
+        },
+        {
+          "word": "ruglaðasta",
+          "tags": ["neuter", "nominative", "weak"]
+        },
+        {
+          "word": "ruglaðasta",
+          "tags": ["error-unrecognized-form", "masculine", "weak"]
+        },
+        {
+          "word": "rugluðustu",
+          "tags": ["error-unrecognized-form", "feminine", "weak"]
+        },
+        {
+          "word": "ruglaðasta",
+          "tags": ["error-unrecognized-form", "neuter", "weak"]
+        },
+        {
+          "word": "rugluðustu",
+          "tags": ["plural", "weak"]
+        }
+      ],
+      "senses": [
+        {
+          "definition": "confused",
+          "tags": [],
+          "examples": [],
+          "quotes": [],
+          "synonyms": ["ringlaður"],
+          "antonyms": [],
+          "subsenses": []
+        },
+        {
+          "definition": "insane, crazy",
+          "tags": [],
+          "examples": [],
+          "quotes": [],
+          "synonyms": ["sturlaður", "vitskertur", "ekki með fulle fem"],
+          "antonyms": [],
+          "subsenses": []
+        },
+        {
+          "definition": "(technology) scrambled (of a television signal)",
+          "tags": [],
+          "examples": [],
+          "quotes": [],
+          "synonyms": [],
+          "antonyms": [],
+          "subsenses": []
+        }
+      ],
+      "synonyms": [],
+      "antonyms": []
+    }
+  ],
+  "source": {
+    "url": "https://en.wiktionary.org/wiki/ruglaður",
+    "license": {
+      "name": "CC BY-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  }
+}
