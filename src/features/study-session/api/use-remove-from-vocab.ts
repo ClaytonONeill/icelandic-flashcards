@@ -1,31 +1,25 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '@/lib/supabase'
-import type { StudyCard } from '@/stores/study-session-context'
 import { VOCAB_LIST_QUERY_PREFIX } from './vocab-list-query-key'
 
-async function addToVocab(card: StudyCard) {
+async function removeFromVocab(icelandicWord: string) {
   const { data: userData, error: userError } = await supabase.auth.getUser()
   if (userError) throw userError
   const userId = userData.user?.id
   if (!userId) throw new Error('Not signed in')
 
-  const { error } = await supabase.from('vocab_list').upsert(
-    {
-      user_id: userId,
-      english_word: card.englishWord,
-      icelandic_word: card.icelandicWord,
-      word_type: card.wordType,
-      dictionary_entry: card.grammarTable,
-    },
-    { onConflict: 'user_id,icelandic_word' },
-  )
+  const { error } = await supabase
+    .from('vocab_list')
+    .delete()
+    .eq('user_id', userId)
+    .eq('icelandic_word', icelandicWord)
   if (error) throw error
 }
 
-export function useAddToVocab() {
+export function useRemoveFromVocab() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: addToVocab,
+    mutationFn: removeFromVocab,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: VOCAB_LIST_QUERY_PREFIX })
     },

@@ -1,21 +1,32 @@
-import { useState } from 'react'
 import type { StudyCard } from '@/stores/study-session-context'
 import { useAddToVocab } from '../api/use-add-to-vocab'
+import { useRemoveFromVocab } from '../api/use-remove-from-vocab'
+import { useVocabMembership } from '../api/use-vocab-membership'
 
 export function AddToVocabButton({ card }: { card: StudyCard }) {
+  const membership = useVocabMembership()
   const addToVocab = useAddToVocab()
-  const [added, setAdded] = useState(false)
+  const removeFromVocab = useRemoveFromVocab()
+
+  const isSaved = membership.data?.has(card.icelandicWord) ?? false
+  const isPending = addToVocab.isPending || removeFromVocab.isPending
+
+  function handleClick() {
+    if (isSaved) {
+      removeFromVocab.mutate(card.icelandicWord)
+    } else {
+      addToVocab.mutate(card)
+    }
+  }
 
   return (
     <button
       type="button"
       className="btn"
-      disabled={added || addToVocab.isPending}
-      onClick={() =>
-        addToVocab.mutate(card, { onSuccess: () => setAdded(true) })
-      }
+      disabled={membership.isPending || isPending}
+      onClick={handleClick}
     >
-      {added ? 'Added' : 'Add to Vocab'}
+      {isSaved ? 'Remove from Vocab' : 'Add to Vocab'}
     </button>
   )
 }
