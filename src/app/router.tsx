@@ -5,6 +5,8 @@ import { LoginRoute } from './routes/login'
 import { SignupRoute } from './routes/signup'
 import { StudyRoute } from './routes/study'
 import { StudyResultsRoute } from './routes/study-results'
+import { VocabListRoute } from './routes/vocab-list'
+import { VocabDeckBuilderRoute } from './routes/vocab-deck-builder'
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +24,8 @@ export const router = createBrowserRouter([
       { index: true, element: <DeckBuilderRoute /> },
       { path: 'study', element: <StudyRoute /> },
       { path: 'study/results', element: <StudyResultsRoute /> },
+      { path: 'vocab', element: <VocabListRoute /> },
+      { path: 'vocab/deck', element: <VocabDeckBuilderRoute /> },
     ],
   },
 ])
